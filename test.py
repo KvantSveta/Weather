@@ -1,5 +1,6 @@
 import unittest2 as unittest
 
+
 class TestGeneratorSpeed(unittest.TestCase):
     @classmethod
     def setUpClass(self):
