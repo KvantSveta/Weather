@@ -13,7 +13,7 @@ class Mongo():
         self._collection_day = self._db['day']
 
     def read(self):
-        self._collection_day.find_one()
+        return self._collection_day.find_one()
 
     def write(self, document):
         self._collection_day.insert_one(document=document)
