@@ -8,13 +8,6 @@ __author__ = "Evgeny Goncharov"
 
 class Weather():
     def __init__(self):
-        self._temperature = None
-        self._wind = None
-        self._pressure = None
-        self._humidity = None
-        self._precipitation = None
-
-    def set(self):
         page = "https://www.gismeteo.ru/weather-stavropol-5141/"
 
         response = urlopen(page).read()
