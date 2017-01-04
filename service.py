@@ -1,3 +1,5 @@
+import time
+
 from weather import Weather
 from mongo import Mongo
 
@@ -8,4 +10,13 @@ w = Weather()
 document = w.get()
 
 m = Mongo()
-m.write(document=document)
+
+# запрос содержит текущую дату
+query = {'date': time.strftime("%d.%m.%y")}
+
+if not m.read(query):
+    print('Записи нет в БД')
+    m.write(document=document)
+    print('Документ успешно записан')
+else:
+    print('Запись уже существует')
