@@ -12,8 +12,11 @@ class Mongo():
 
         self._collection_day = self._db['day']
 
-    def read(self, query=None, _filter=None):
+    def find(self, query=None, _filter=None):
+        return [i for i in self._collection_day.find(query, _filter)]
+
+    def find_one(self, query=None, _filter=None):
         return self._collection_day.find_one(query, _filter)
 
-    def write(self, document):
+    def insert_one(self, document):
         self._collection_day.insert_one(document=document)
