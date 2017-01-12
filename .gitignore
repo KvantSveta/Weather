@@ -3,3 +3,4 @@ readme.md
 requirements
 mongodb.conf
 weather.log
+.flake8
