@@ -1,4 +1,5 @@
 .idea
 readme.md
 requirements
-/.flake8
+mongodb.conf
+weather.log
