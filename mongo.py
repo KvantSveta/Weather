@@ -1,4 +1,3 @@
-from logger import Logger
 from pymongo import MongoClient
 from pymongo import errors
 
@@ -6,12 +5,12 @@ __author__ = "Evgeny Goncharov"
 
 
 class Mongo():
-    def __init__(self, ip_address='localhost', port=27017, db_name='weather'):
-        self._log = Logger()
+    def __init__(self, log, ip_address='localhost', port=27017):
+        self._log = log
 
         self._client = MongoClient(host=ip_address, port=port)
 
-        self._db = self._client[db_name]
+        self._db = self._client['weather']
 
         self._collection_day = self._db['day']
 
