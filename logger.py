@@ -5,8 +5,8 @@ __author__ = "Evgeny Goncharov"
 
 
 class Logger():
-    def __init__(self):
-        file_handler = logging.FileHandler('weather.log', 'a')
+    def __init__(self, file_name='weather.log'):
+        file_handler = logging.FileHandler(file_name, 'a')
         formatter = logging.Formatter(
             fmt='%(asctime)s %(levelname)s %(message)s',
             datefmt="%e %b %y %H:%M:%S"
