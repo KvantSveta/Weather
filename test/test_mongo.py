@@ -11,9 +11,12 @@ __author__ = "Evgeny Goncharov"
 class TestMongo(unittest.TestCase):
     @classmethod
     def setUpClass(self):
-        self.mongo_local = Mongo(Logger(), ip_address='127.0.0.1', port=27017)
+        file_name = 'test_mongo.log'
+        self.mongo_local = Mongo(
+            Logger(file_name=file_name), ip_address='127.0.0.1', port=27017
+        )
         self.mongo_host = Mongo(
-            Logger(), ip_address='192.168.1.102', port=27017
+            Logger(file_name=file_name), ip_address='192.168.1.102', port=27017
         )
 
     def test_find(self):
