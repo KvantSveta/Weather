@@ -4,3 +4,4 @@ requirements
 mongodb.conf
 *.log
 .flake8
+*.pyc
