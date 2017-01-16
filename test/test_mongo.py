@@ -61,7 +61,6 @@ class TestMongo(unittest.TestCase):
         answer = self.mongo_host.find(query=query, _filter=_filter)
         self.assertFalse(answer)
 
-    @unittest.skip
     def test_insert(self):
         count = self.mongo_local._collection_day.count()
         document = {'temp': 123456}
@@ -70,6 +69,10 @@ class TestMongo(unittest.TestCase):
         self.assertEqual(new_count, count + 1)
 
         self.mongo_local._collection_day.remove(document)
+        new_count = self.mongo_local._collection_day.count()
+        self.assertEqual(new_count, count)
+
+        self.mongo_host.insert_one(document=document)
         new_count = self.mongo_local._collection_day.count()
         self.assertEqual(new_count, count)
 
