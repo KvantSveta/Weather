@@ -35,6 +35,8 @@ class Weather():
         return self._flag
 
     def set_weather(self, soup):
+        self.set_date()
+
         self.set_temperature(soup)
 
         self.set_wind(soup)
@@ -44,6 +46,9 @@ class Weather():
         self.set_humidity(soup)
 
         self.set_precipitation(soup)
+
+    def set_date(self):
+        self._date = time.strftime("%d.%m.%y")
 
     def set_temperature(self, soup):
         # температура, градус Цельсия
@@ -81,6 +86,10 @@ class Weather():
             self._precipitation = ['0'] * 9
 
     @property
+    def date(self):
+        return self._date
+
+    @property
     def temperature(self):
         return self._temperature
 
@@ -103,7 +112,7 @@ class Weather():
     @property
     def get_weather(self):
         return {
-            'date': time.strftime("%d.%m.%y"),
+            'date': self.date,
             'temperature': self.temperature,
             'wind': self.wind,
             'pressure': self.pressure,
