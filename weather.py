@@ -9,12 +9,12 @@ __author__ = "Evgeny Goncharov"
 
 
 class Weather():
-    def __init__(self, log):
+    def __init__(
+            self, log, page="https://www.gismeteo.ru/weather-stavropol-5141/"
+    ):
         self._log = log
 
         self._flag = False
-
-        page = "https://www.gismeteo.ru/weather-stavropol-5141/"
 
         try:
             response = urlopen(page).read()
