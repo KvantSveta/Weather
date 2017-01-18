@@ -15,12 +15,12 @@ class TestWeather(unittest.TestCase):
 
     def test_good_connect(self):
         w = Weather(Logger(file_name=self.file_name))
-        self.assertTrue(w.flag)
+        self.assertTrue(w.ok_response)
         self.assertTrue(w.get_weather)
 
     def test_bad_connect(self):
         w = Weather(Logger(file_name=self.file_name), page='https:/10.0.0.1/')
-        self.assertFalse(w.flag)
+        self.assertFalse(w.ok_response)
         with self.assertRaises(AttributeError):
             w.get_weather
 
