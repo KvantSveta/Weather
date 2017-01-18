@@ -1,3 +1,4 @@
+import subprocess
 import unittest2 as unittest
 
 from weather import Weather
@@ -8,18 +9,24 @@ __author__ = "Evgeny Goncharov"
 
 
 class TestWeather(unittest.TestCase):
+    @classmethod
+    def setUpClass(self):
+        self.file_name = 'test_weather.log'
+
     def test_good_connect(self):
-        log = Logger(file_name='test_weather.log')
-        w = Weather(log)
+        w = Weather(Logger(file_name=self.file_name))
         self.assertTrue(w.flag)
         self.assertTrue(w.get_weather)
 
     def test_bad_connect(self):
-        log = Logger(file_name='test_weather.log')
-        w = Weather(log, page='https:/10.0.0.1/')
+        w = Weather(Logger(file_name=self.file_name), page='https:/10.0.0.1/')
         self.assertFalse(w.flag)
         with self.assertRaises(AttributeError):
-            log.logger.info(w.get_weather)
+            w.get_weather
+
+    @classmethod
+    def tearDownClass(self):
+        subprocess.call(['rm', self.file_name])
 
 
 if __name__ == '__main__':
