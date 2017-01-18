@@ -31,7 +31,7 @@ class Weather():
         self.set_weather(soup)
 
     @property
-    def flag(self):
+    def ok_response(self):
         return self._flag
 
     def set_weather(self, soup):
