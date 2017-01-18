@@ -5,10 +5,12 @@ __author__ = "Evgeny Goncharov"
 
 
 class Mongo():
-    def __init__(self, log, ip_address='localhost', port=27017):
+    def __init__(self, log, ip_address='localhost', port=27017,
+                 server_timeout_ms=1000):
         self._log = log
 
-        self._client = MongoClient(host=ip_address, port=port)
+        self._client = MongoClient(host=ip_address, port=port,
+                                   serverSelectionTimeoutMS=server_timeout_ms)
 
         self._db = self._client['weather']
 
@@ -23,6 +25,11 @@ class Mongo():
             except Exception as e:
                 self._log.logger.error('Неизвестная ошибка (%s)', e)
         return wrapper
+
+    @property
+    @decorator
+    def ping_mongodb(self):
+        return bool(self._client.server_info())
 
     @decorator
     def find(self, query=None, _filter=None):
