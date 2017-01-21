@@ -1,4 +1,6 @@
 import time
+import signal
+from threading import Event
 
 from weather import Weather
 from mongo import Mongo
@@ -7,12 +9,24 @@ from logger import Logger
 
 __author__ = "Evgeny Goncharov"
 
+
+run_service = Event()
+run_service.set()
+
 log = Logger()
 m = Mongo(log)
 
+
+def handler(signum, frame):
+    run_service.clear()
+    log.logger.info('Сигнал для остановки контейнера (%s)', signum)
+
+
+signal.signal(signal.SIGTERM, handler)
+
 log.logger.info('Сервис запущен')
 
-while True:
+while run_service.is_set():
     # запрос содержит текущую дату
     query = {'date': time.strftime("%d.%m.%y")}
 
@@ -33,10 +47,9 @@ while True:
     else:
         log.logger.critical('Сервер с БД недоступен')
 
-    try:
-        # делать запрос каждый час
-        time.sleep(3600)
-    except:
-        break
+    start = time.time()
+    # делать запрос каждый час
+    while run_service.is_set() and time.time() - start < 3600:
+        time.sleep(1)
 
 log.logger.info('Сервис остановлен\n')
