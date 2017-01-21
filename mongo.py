@@ -5,25 +5,25 @@ __author__ = "Evgeny Goncharov"
 
 
 class Mongo():
-    def __init__(self, log, ip_address='localhost', port=27017,
+    def __init__(self, log, ip_address="localhost", port=27017,
                  server_timeout_ms=1000):
         self._log = log
 
         self._client = MongoClient(host=ip_address, port=port,
                                    serverSelectionTimeoutMS=server_timeout_ms)
 
-        self._db = self._client['weather']
+        self._db = self._client["weather"]
 
-        self._collection_day = self._db['day']
+        self._collection_day = self._db["day"]
 
     def decorator(function):
         def wrapper(self, *args, **kwargs):
             try:
                 return function(self, *args, **kwargs)
             except errors.ServerSelectionTimeoutError as e:
-                self._log.logger.error('Невозможно подключиться к БД (%s)', e)
+                self._log.logger.error("Невозможно подключиться к БД (%s)", e)
             except Exception as e:
-                self._log.logger.error('Неизвестная ошибка (%s)', e)
+                self._log.logger.error("Неизвестная ошибка (%s)", e)
         return wrapper
 
     @property
