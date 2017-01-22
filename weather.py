@@ -1,4 +1,5 @@
 import time
+import re
 from urllib.request import urlopen
 from urllib.error import URLError
 
@@ -53,37 +54,55 @@ class Weather():
     def set_temperature(self, soup):
         # температура, градус Цельсия
         s = soup.find("div", "templine_inner")
-        self._temperature = [
+        temperature = [
             t.text for t in s.find_all("span", "js_value val_to_convert")
         ]
 
+        temperature = [c.replace(chr(8722), '-') for c in temperature]
+
+        self._temperature = list(map(int, temperature))
+
     def set_wind(self, s):
         # скорость и направление ветра, м/с
-        self._wind = [
+        wind = [
             w.text for w in s.find_all("div", "wind_value js_meas_container")
         ]
+
+        wind = [c.replace('штиль', '0') for c in wind]
+
+        r = re.compile("(\d*)(\w*)")
+
+        wind = [r.match(m) for m in wind]
+        self._wind = [(int(m.group(1)), m.group(2)) for m in wind]
 
     def set_pressure(self, soup):
         # давление, мм рт. ст.
         s = soup.find("div", "pressureline")
         self._pressure = [
-            p.text for p in s.find_all("span", "js_value val_to_convert")
+            int(p.text) for p in s.find_all("span", "js_value val_to_convert")
         ]
 
     def set_humidity(self, soup):
         # влажность, %
         self._humidity = [
-            h.text for h in soup.find_all("div", "humidity_value")
+            int(h.text) for h in soup.find_all("div", "humidity_value")
         ]
 
     def set_precipitation(self, s):
         # атмосферные осадки, мм
         _s = s.find("div", "_line precipitationline js_precipitation clearfix")
-        self._precipitation = [
+        precipitation = [
             r.text.strip() for r in _s.find_all("div", "weather_item")
         ]
-        if self._precipitation == []:
-            self._precipitation = ["0"] * 9
+
+        if precipitation == []:
+            self._precipitation = [0.0] * 9
+        else:
+            precipitation = [c.replace("н/д", "0") for c in precipitation]
+
+            precipitation = [c.replace(",", ".") for c in precipitation]
+
+            self._precipitation = list(map(float, precipitation))
 
     @property
     def date(self):
