@@ -5,3 +5,4 @@ mongodb.conf
 *.log
 .flake8
 *.pyc
+docker-compose.yml
