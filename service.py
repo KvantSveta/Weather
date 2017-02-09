@@ -49,7 +49,10 @@ while run_service.is_set():
 
     start = time.time()
     # делать запрос каждый час
-    while run_service.is_set() and time.time() - start < 3600:
-        time.sleep(1)
+    try:
+        while run_service.is_set() and time.time() - start < 3600:
+            time.sleep(1)
+    except Exception as e:
+        log.logger.critical("Неизвестная ошибка (%s)", e)
 
 log.logger.info("Сервис остановлен\n")
