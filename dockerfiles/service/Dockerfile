@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends apt-utils \
                    && apt-get clean
 
 RUN echo "Europe/Moscow" > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
+
 # signal SIGTERM
 STOPSIGNAL 15
 
