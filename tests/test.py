@@ -23,7 +23,7 @@ class TestGeneratorSpeed(unittest.TestCase):
 
         s = time.time()
         [c.replace(chr(8722), '-') for c in self.a]
-        print('test 1:', time.time() - s)
+        print('tests 1:', time.time() - s)
 
     def test_2(self):
         import time
@@ -31,7 +31,7 @@ class TestGeneratorSpeed(unittest.TestCase):
         s = time.time()
         minus = chr(8722)
         [c.replace(minus, '-') for c in self.b]
-        print('test 2:', time.time() - s)
+        print('tests 2:', time.time() - s)
 
     @classmethod
     def tearDownClass(self):
