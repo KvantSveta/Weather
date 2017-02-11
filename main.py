@@ -25,11 +25,38 @@ def temperature():
     )
 
 
-@app.route("/index", methods=["GET"])
-def index():
+@app.route("/weather", methods=["GET"])
+def weather():
     query = {"date": time.strftime("%d.%m.%y")}
     current_time = str(time.strftime("%H:%M:%S - %d.%m.%y"))
-    return current_time + "<br>" + str(m.find_one(query))
+    weather = m.find_one(query)
+
+    # температура, градус Цельсия
+    temperature = weather["temperature"]
+    # влажность, %
+    humidity = weather["humidity"]
+    # давление, мм рт. ст.
+    pressure = weather["pressure"]
+    # скорость и направление ветра, м/с
+    wind = weather["wind"]
+    # атмосферные осадки, мм
+    precipitation = weather["precipitation"]
+
+    return render_template(
+        "weather.html",
+        temperature=temperature,
+        humidity=humidity,
+        pressure=pressure,
+        wind=wind,
+        precipitation=precipitation,
+        current_time=current_time
+    )
 
 
-app.run(host="localhost", port=5000, debug=True)
+app.config.from_json("config.json")
+
+app.run(
+    host=app.config.get("HOST"),
+    port=app.config.get("PORT"),
+    debug=app.config.get("DEBUG")
+)
