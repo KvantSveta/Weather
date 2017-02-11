@@ -1,6 +1,5 @@
 .idea
 readme.md
-requirements
 mongodb.conf
 *.log
 .flake8
