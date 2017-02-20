@@ -22,10 +22,10 @@ class Weather():
             response = urlopen(self._page).read()
             self._flag = True
         except URLError as e:
-            self._log.logger.error("Невозможно отправить запрос (%s)", e)
+            self._log.error("Невозможно отправить запрос (%s)", e)
             return
         except Exception as e:
-            self._log.logger.error("Неизвестная ошибка (%s)", e)
+            self._log.error("Неизвестная ошибка (%s)", e)
             return
 
         soup = BeautifulSoup(response, "lxml")

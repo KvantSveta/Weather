@@ -19,12 +19,12 @@ m = Mongo(log)
 
 def handler(signum, frame):
     run_service.clear()
-    log.logger.info("Сигнал для остановки контейнера (%s)", signum)
+    log.info("Сигнал для остановки контейнера (%s)", signum)
 
 
 signal.signal(signal.SIGTERM, handler)
 
-log.logger.info("Сервис запущен")
+log.info("Сервис запущен")
 
 while run_service.is_set():
     # запрос содержит текущую дату
@@ -34,18 +34,18 @@ while run_service.is_set():
     if m.ping_mongodb:
         # записи нет в БД
         if not m.find_one(query):
-            log.logger.info("Записи нет в БД")
+            log.info("Записи нет в БД")
             w = Weather(log)
             # информация о погоде успешно получена
             if w.ok_response:
                 m.insert_one(document=w.get_weather)
-                log.logger.info("Документ успешно записан")
+                log.info("Документ успешно записан")
             else:
-                log.logger.critical("Невозможно получить информацию о погоде")
+                log.critical("Невозможно получить информацию о погоде")
         else:
-            log.logger.info("Запись уже существует")
+            log.info("Запись уже существует")
     else:
-        log.logger.critical("Сервер с БД недоступен")
+        log.critical("Сервер с БД недоступен")
 
     start = time.time()
     # делать запрос каждый час
@@ -53,6 +53,6 @@ while run_service.is_set():
         while run_service.is_set() and time.time() - start < 3600:
             time.sleep(1)
     except Exception as e:
-        log.logger.critical("Неизвестная ошибка (%s)", e)
+        log.critical("Неизвестная ошибка (%s)", e)
 
-log.logger.info("Сервис остановлен\n")
+log.info("Сервис остановлен\n")
