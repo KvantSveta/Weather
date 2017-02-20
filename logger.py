@@ -1,5 +1,6 @@
 import logging
 
+from led import Led, GREEN, YELLOW, RED
 
 __author__ = "Evgeny Goncharov"
 
@@ -15,3 +16,20 @@ class Logger():
         self.logger = logging.getLogger()
         self.logger.addHandler(file_handler)
         self.logger.setLevel(logging.INFO)
+
+        self._led = Led()
+
+    def info(self, msg, time_shine=3):
+        self._led.led_shine(GREEN, time_shine)
+
+        self.logger.info(msg=msg)
+
+    def error(self, msg, time_shine=600):
+        self._led.led_shine(YELLOW, time_shine)
+
+        self.logger.error(msg=msg)
+
+    def critical(self, msg, time_shine=600):
+        self._led.led_shine(RED, time_shine)
+
+        self.logger.critical(msg=msg)
