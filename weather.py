@@ -5,7 +5,6 @@ from urllib.error import URLError
 
 from bs4 import BeautifulSoup
 
-
 __author__ = "Evgeny Goncharov"
 
 
@@ -138,3 +137,18 @@ class Weather():
             "humidity": self.humidity,
             "precipitation": self.precipitation
         }
+
+
+if __name__ == "__main__":
+    import subprocess
+
+    from logger import Logger
+
+    start = time.time()
+    log_file = "main.log"
+    log = Logger(log_file)
+    w = Weather(log)
+    # print(w.get_weather)
+    print('Время работы:', round(time.time() - start, 3), 'с')
+
+    subprocess.call(["rm", log_file])
