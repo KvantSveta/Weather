@@ -1,6 +1,4 @@
 import time
-import RPi.GPIO as GPIO
-import threading
 from subprocess import check_output
 
 from flask import Flask, render_template
@@ -10,39 +8,15 @@ from logger import Logger
 
 __author__ = "Evgeny Goncharov"
 
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM)
-
 app = Flask(__name__, static_url_path="")
 
 log = Logger("web.log")
 m = Mongo(log)
 
-RED = 19
-GREEN = 26
-BLUE = 13
-
-GPIO.setup(RED, GPIO.OUT, initial=GPIO.LOW)
-GPIO.setup(GREEN, GPIO.OUT, initial=GPIO.LOW)
-GPIO.setup(BLUE, GPIO.OUT, initial=GPIO.LOW)
-
-
-def decorator(func):
-    def wrapper(*args, **kwargs):
-        threading.Thread(target=func, args=args, kwargs=kwargs).start()
-    return wrapper
-
-
-@decorator
-def led_shine(colour, time_shine):
-    GPIO.output(colour, GPIO.HIGH)
-    time.sleep(time_shine)
-    GPIO.output(colour, GPIO.LOW)
-
 
 @app.route("/", methods=["GET"])
 def temperature():
-    led_shine(GREEN, 3)
+    log.info("Запрос на получение температуры RPi", 3)
 
     temp = check_output(["cat", "/sys/class/thermal/thermal_zone0/temp"])
     temp = temp.decode()
@@ -56,7 +30,7 @@ def temperature():
 
 @app.route("/weather", methods=["GET"])
 def weather():
-    led_shine(BLUE, 3)
+    log.info("Запрос на получение информации о погоде", 3)
 
     query = {"date": time.strftime("%d.%m.%y")}
     current_time = str(time.strftime("%H:%M:%S - %d.%m.%y"))
