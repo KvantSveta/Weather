@@ -13,7 +13,8 @@ RUN pip3 install -U pip \
                     bs4 \
                     pymongo \
                     flask \
-                    lxml
+                    lxml \
+                    rpi.gpio
 
 RUN apt-get clean
 
