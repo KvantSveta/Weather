@@ -24,7 +24,7 @@ def handler(signum, frame):
 
 signal.signal(signal.SIGTERM, handler)
 
-log.info("Сервис запущен")
+log.info("Сервис запущен", 1)
 
 while run_service.is_set():
     # запрос содержит текущую дату
