@@ -65,17 +65,4 @@ class Led():
         GPIO.output(self.red_gpio, GPIO.LOW)
 
     def __del__(self):
-        GPIO.cleanup()
-
-
-'''
-    R  G  B
-(0, 0, 0, 0)
-(1, 0, 0, 1)
-(2, 0, 1, 0)
-(3, 0, 1, 1)
-(4, 1, 0, 0)
-(5, 1, 0, 1)
-(6, 1, 1, 0)
-(7, 1, 1, 1)
-'''
+        GPIO.cleanup([self.blue_gpio, self.green_gpio, self.red_gpio])
