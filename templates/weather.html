@@ -1,32 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="weather.css" />
         <title>Погода на сегодня</title>
     </head>
     <body>
-        <div class="w">
-            Текущее время: {{current_time}}
-        </div>
-        <br>
-        <div class="w">
-            Погода на сегодня
-        </div>
-        <div class="w">
-            Температура воздуха (градус Цельсия): {{temperature}}
-        </div>
-        <div class="w">
-            Влажность (%): {{humidity}}
-        </div>
-        <div class="w">
-            Давление (мм рт. ст.): {{pressure}}
-        </div>
-        <div class="w">
-            Скорость и направление ветра (м/с): {{wind}}
-        </div>
-        <div class="w">
-            Атмосферные осадки (мм): {{precipitation}}
-        </div>
+        <main>
+            <div class="w">
+                <p>
+                    Текущее время: {{current_time}}
+                </p>
+                <p>
+                    Погода на сегодня
+                </p>
+                <p>
+                    Температура воздуха (градус Цельсия): {{temperature}}
+                </p>
+                <p>
+                    Влажность (%): {{humidity}}
+                </p>
+                <p>
+                    Давление (мм рт. ст.): {{pressure}}
+                </p>
+                <p>
+                    Скорость и направление ветра (м/с): {{wind}}
+                </p>
+                <p>
+                    Атмосферные осадки (мм): {{precipitation}}
+                </p>
+            </div>
+        </main>
     </body>
 </html>
