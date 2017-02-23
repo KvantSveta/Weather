@@ -22,12 +22,9 @@ class Pwm_led():
         GPIO.setup(self._green_gpio, GPIO.OUT, initial=GPIO.LOW)
         GPIO.setup(self._blue_gpio, GPIO.OUT, initial=GPIO.LOW)
 
-        self._red_frq = GPIO.PWM(self._red_gpio, 50)
-        self._red_frq.start(0)
-        self._green_frq = GPIO.PWM(self._green_gpio, 50)
-        self._green_frq.start(0)
-        self._blue_frq = GPIO.PWM(self._blue_gpio, 50)
-        self._blue_frq.start(0)
+        self._red_pwm = GPIO.PWM(self._red_gpio, 50)
+        self._green_pwm = GPIO.PWM(self._green_gpio, 50)
+        self._blue_pwm = GPIO.PWM(self._blue_gpio, 50)
 
     def decorator(func):
         def wrapper(*args, **kwargs):
@@ -36,20 +33,16 @@ class Pwm_led():
         return wrapper
 
     @decorator
-    def change_colour(self, red=0, green=0, blue=0, time_chine=60):
-        self._red_frq.ChangeDutyCycle(red)
-        self._green_frq.ChangeDutyCycle(green)
-        self._blue_frq.ChangeDutyCycle(blue)
+    def change_colour(self, red=0, green=0, blue=0, time_shine=60):
+        self._red_pwm.start(red)
+        self._green_pwm.start(green)
+        self._blue_pwm.start(blue)
 
-        time.sleep(time_chine)
+        time.sleep(time_shine)
 
-        self._red_frq.ChangeDutyCycle(0)
-        self._green_frq.ChangeDutyCycle(0)
-        self._blue_frq.ChangeDutyCycle(0)
+        self._red_pwm.stop()
+        self._green_pwm.stop()
+        self._blue_pwm.stop()
 
     def __del__(self):
-        self._red_frq.stop()
-        self._green_frq.stop()
-        self._blue_frq.stop()
-
         GPIO.cleanup([self._red_gpio, self._green_gpio, self._blue_gpio])
