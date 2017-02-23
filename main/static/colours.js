@@ -33,6 +33,5 @@ function GetColours() {
         )
     );
 
-    document.body.style.backgroundColor = "rgb(" + red_colour + "," + green_colour + "," + blue_colour + ")";
-    //document.body.style.backgroundColor = "rgb(" + [red_colour, green_colour, blue_colour].join(",") + ")";
+    document.body.style.backgroundColor = `rgb(${red_colour}, ${green_colour}, ${blue_colour})`;
 }
