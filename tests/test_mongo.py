@@ -1,10 +1,10 @@
-import time
 import subprocess
+import time
+
 import unittest2 as unittest
+from main.mongo import Mongo
 
-from mongo import Mongo
-from logger import Logger
-
+from main.logger import Logger
 
 __author__ = "Evgeny Goncharov"
 

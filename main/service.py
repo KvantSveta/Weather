@@ -2,9 +2,8 @@ import signal
 import time
 from threading import Event
 
-from mongo import Mongo
-from weather import Weather
-
+from main.mongo import Mongo
+from main.weather import Weather
 from main.logger import Logger
 
 __author__ = "Evgeny Goncharov"
