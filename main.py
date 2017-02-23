@@ -5,7 +5,7 @@ from flask import Flask, render_template, request
 
 from mongo import Mongo
 from logger import Logger
-from pwm import Pwm_led, import_package
+from pwm import Pwm_led, import_pwm
 
 __author__ = "Evgeny Goncharov"
 
@@ -68,7 +68,7 @@ def colours():
         red = int(data["red"] / 255 * 100)
         green = int(data["green"] / 255 * 100)
         blue = int(data["blue"] / 255 * 100)
-        if import_package:
+        if import_pwm:
             pwm_led.change_colour(red, green, blue)
     return render_template("colours.html")
 
