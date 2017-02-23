@@ -2,3 +2,4 @@ flask
 pymongo
 bs4
 lxml
+rpi.gpio
