@@ -1,6 +1,4 @@
 .idea
-readme.md
-mongodb.conf
 *.log
 .flake8
 *.pyc
