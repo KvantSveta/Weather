@@ -27,7 +27,7 @@ class Pwm_led():
         self._blue_frq = GPIO.PWM(self._blue_gpio, 50)
         self._blue_frq.start(0)
 
-    def change_colour(self, red=0, green=0, blue=0, time_shine=60):
+    def change_colour(self, red=0, green=0, blue=0):
         self._red_frq.ChangeDutyCycle(red)
         self._green_frq.ChangeDutyCycle(green)
         self._blue_frq.ChangeDutyCycle(blue)
