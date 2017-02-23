@@ -36,7 +36,7 @@ class Pwm_led():
         return wrapper
 
     @decorator
-    def change_colour(self, time_shine=60, red=0, green=0, blue=0):
+    def change_colour(self, red=0, green=0, blue=0, time_shine=60):
         self._red_frq.ChangeDutyCycle(red)
         self._green_frq.ChangeDutyCycle(green)
         self._blue_frq.ChangeDutyCycle(blue)
