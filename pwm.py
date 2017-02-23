@@ -1,10 +1,8 @@
-import time
-import threading
 try:
     import RPi.GPIO as GPIO
-    import_package = True
+    import_pwm = True
 except RuntimeError:
-    import_package = False
+    import_pwm = False
 
 __author__ = "Evgeny Goncharov"
 
@@ -29,23 +27,14 @@ class Pwm_led():
         self._blue_frq = GPIO.PWM(self._blue_gpio, 50)
         self._blue_frq.start(0)
 
-    def decorator(func):
-        def wrapper(*args, **kwargs):
-            threading.Thread(target=func, args=args, kwargs=kwargs).start()
-
-        return wrapper
-
-    @decorator
     def change_colour(self, red=0, green=0, blue=0, time_shine=60):
         self._red_frq.ChangeDutyCycle(red)
         self._green_frq.ChangeDutyCycle(green)
         self._blue_frq.ChangeDutyCycle(blue)
 
-        time.sleep(time_shine)
-
+    def __del__(self):
         self._red_frq.stop()
         self._green_frq.stop()
         self._blue_frq.stop()
 
-    def __del__(self):
         GPIO.cleanup([self._red_gpio, self._green_gpio, self._blue_gpio])
