@@ -14,7 +14,8 @@ app = Flask(__name__, static_url_path="")
 log = Logger("web.log")
 m = Mongo(log)
 
-pwm_led = Pwm_led()
+if import_pwm:
+    pwm_led = Pwm_led()
 
 
 @app.route("/", methods=["GET"])
