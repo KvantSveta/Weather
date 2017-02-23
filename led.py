@@ -2,9 +2,9 @@ import time
 import threading
 try:
     import RPi.GPIO as GPIO
-    import_package = True
+    import_led = True
 except RuntimeError:
-    import_package = False
+    import_led = False
 
 __author__ = "Evgeny Goncharov"
 
