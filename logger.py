@@ -1,6 +1,6 @@
 import logging
 
-from led import Led, GREEN, YELLOW, RED
+from led import import_package, Led, GREEN, YELLOW, RED
 
 __author__ = "Evgeny Goncharov"
 
@@ -17,19 +17,24 @@ class Logger():
         self.logger.addHandler(file_handler)
         self.logger.setLevel(logging.INFO)
 
-        self._led = Led()
+        # только для RPi
+        if import_package:
+            self._led = Led()
 
     def info(self, msg, time_shine=3):
         self._led.led_shine(GREEN, time_shine)
 
-        self.logger.info(msg=msg)
+        if import_package:
+            self.logger.info(msg=msg)
 
     def error(self, msg, time_shine=600):
         self._led.led_shine(YELLOW, time_shine)
 
-        self.logger.error(msg=msg)
+        if import_package:
+            self.logger.error(msg=msg)
 
     def critical(self, msg, time_shine=600):
         self._led.led_shine(RED, time_shine)
 
-        self.logger.critical(msg=msg)
+        if import_package:
+            self.logger.critical(msg=msg)
