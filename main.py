@@ -1,10 +1,11 @@
 import time
 from subprocess import check_output
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 from mongo import Mongo
 from logger import Logger
+from pwm import Pwm_led, import_package
 
 __author__ = "Evgeny Goncharov"
 
@@ -12,6 +13,8 @@ app = Flask(__name__, static_url_path="")
 
 log = Logger("web.log")
 m = Mongo(log)
+
+pwm_led = Pwm_led()
 
 
 @app.route("/", methods=["GET"])
@@ -56,6 +59,18 @@ def weather():
         precipitation=precipitation,
         current_time=current_time
     )
+
+
+@app.route("/colours", methods=["GET", "POST"])
+def colours():
+    data = request.json
+    if data:
+        red = int(data["red"] / 255 * 100)
+        green = int(data["green"] / 255 * 100)
+        blue = int(data["blue"] / 255 * 100)
+        if import_package:
+            pwm_led.change_colour(red, green, blue)
+    return render_template("colours.html")
 
 
 app.config.from_json("config.json")
