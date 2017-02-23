@@ -1,6 +1,10 @@
 import time
 import threading
-import RPi.GPIO as GPIO
+try:
+    import RPi.GPIO as GPIO
+    import_package = True
+except RuntimeError:
+    import_package = False
 
 __author__ = "Evgeny Goncharov"
 
