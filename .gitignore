@@ -1,5 +1,6 @@
 .idea
 *.log
 .flake8
-*.pyc
 docker-compose.yml
+.cache/
+__pycache__/
