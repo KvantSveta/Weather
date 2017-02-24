@@ -6,14 +6,11 @@ function GetColours() {
         document.getElementById("blue").value
     ];
 
-    //array = [for (i of array) parseInt(i)];
+    array = array.map(i => parseInt(i));
 
     for (i = 0; i < array.length; i++) {
-        colour = parseInt(array[i]);
-        if (!Number.isInteger(colour) || colour < 0 || colour > 255) {
+        if (!Number.isInteger(array[i]) || array[i] < 0 || array[i] > 255) {
             array[i] = 0;
-        } else {
-            array[i] = colour;
         }
     }
 
@@ -30,5 +27,5 @@ function GetColours() {
         )
     );
 
-    document.body.style.backgroundColor = `rgb(${red_colour}, ${green_colour}, ${blue_colour})`;
+    document.body.style.backgroundColor = `rgb(${array[0]}, ${array[1]}, ${array[2]})`;
 }
