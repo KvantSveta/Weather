@@ -64,13 +64,17 @@ def weather():
 
 @app.route("/colours", methods=["GET", "POST"])
 def colours():
+    log.info("Запрос на изменения цвета led с использование pwm на RPi", 3)
+
     data = request.json
-    if data:
-        red = int(data["red"] / 255 * 100)
-        green = int(data["green"] / 255 * 100)
-        blue = int(data["blue"] / 255 * 100)
-        if import_pwm:
-            pwm_led.change_colour(red, green, blue)
+    # only on RPi
+    if data and import_pwm:
+        pwm_led.change_colour(
+            int(data["red"] / 255 * 100),
+            int(data["green"] / 255 * 100),
+            int(data["blue"] / 255 * 100)
+        )
+
     return render_template("colours.html")
 
 
