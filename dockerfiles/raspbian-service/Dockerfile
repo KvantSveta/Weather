@@ -14,7 +14,8 @@ RUN pip3 install -U pip \
                     pymongo \
                     flask \
                     lxml \
-                    rpi.gpio
+                    rpi.gpio \
+                    unittest2
 
 RUN apt-get clean
 
