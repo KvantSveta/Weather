@@ -1,9 +1,9 @@
 import subprocess
 
 import unittest2 as unittest
-from main.weather import Weather
 
-from main.logger import Logger
+from weather import Weather
+from logger import Logger
 
 __author__ = "Evgeny Goncharov"
 
