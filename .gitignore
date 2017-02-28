@@ -5,3 +5,4 @@ docker-compose.yml
 .cache/
 __pycache__/
 .babelrc
+node_modules
