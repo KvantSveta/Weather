@@ -3,8 +3,8 @@ import time
 
 import unittest2 as unittest
 
-from mongo import Mongo
-from logger import Logger
+from main.logger import Logger
+from main.mongo import Mongo
 
 __author__ = "Evgeny Goncharov"
 
