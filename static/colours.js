@@ -7,7 +7,7 @@ function GetColours() {
         return parseInt(i);
     });
 
-    for (i = 0; i < array.length; i++) {
+    for (var i = 0; i < array.length; i++) {
         if (!Number.isInteger(array[i]) || array[i] < 0 || array[i] > 255) {
             array[i] = 0;
         }
