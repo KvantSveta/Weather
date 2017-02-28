@@ -1,12 +1,12 @@
 import logging
 
-from led import import_led, Led, GREEN, YELLOW, RED
+from main.led import import_led, Led, GREEN, YELLOW, RED
 
 __author__ = "Evgeny Goncharov"
 
 
 class Logger():
-    def __init__(self, file_name="weather.log"):
+    def __init__(self, file_name="temp.log"):
         file_handler = logging.FileHandler(file_name, "a")
         formatter = logging.Formatter(
             fmt="%(asctime)s %(levelname)s %(message)s",
