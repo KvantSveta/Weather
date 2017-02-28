@@ -3,9 +3,9 @@ from subprocess import check_output
 
 from flask import Flask, render_template, request
 
-from mongo import Mongo
-from pwm import Pwm_led, import_pwm
 from logger import Logger
+from pwm import Pwm_led, import_pwm
+from mongo import Mongo
 
 __author__ = "Evgeny Goncharov"
 

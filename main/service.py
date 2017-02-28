@@ -2,12 +2,11 @@ import signal
 import time
 from threading import Event
 
-from mongo import Mongo
-from weather import Weather
 from logger import Logger
+from weather import Weather
+from mongo import Mongo
 
 __author__ = "Evgeny Goncharov"
-
 
 run_service = Event()
 run_service.set()
