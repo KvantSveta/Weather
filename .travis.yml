@@ -1,4 +1,8 @@
-language: python
+language:
+  - python
+
+services:
+  - mongodb
 
 os:
   - linux
