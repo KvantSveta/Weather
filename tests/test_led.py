@@ -39,7 +39,7 @@ class TestLed(unittest.TestCase):
             array = [i.decode() for i in array]
             array = [i.strip() for i in array]
 
-            string = 'ob' + ''.join(array)
+            string = '0b' + ''.join(array)
             return int(string, base=2)
 
         time_shine = 3
