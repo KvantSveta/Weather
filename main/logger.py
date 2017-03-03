@@ -1,6 +1,9 @@
 import logging
 
-from main.led import import_led, Led, GREEN, YELLOW, RED
+try:
+    from led import import_led, Led, GREEN, YELLOW, RED
+except ImportError:
+    from main.led import import_led, Led, GREEN, YELLOW, RED
 
 __author__ = "Evgeny Goncharov"
 
