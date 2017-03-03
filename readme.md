@@ -21,6 +21,6 @@ docker kill -s 15 CONTAINER_ID
 
 on RPi in ~/Weather
 ```bash
-docker run -d --net=host --device /dev/gpiomem -v /home/jd/Weather/:/home -w /home raspbian-service:1.0 service.py
-docker run -d --net=host --device /dev/gpiomem -v /home/jd/Weather/:/home -w /home raspbian-service:1.0 web.py
+docker run -d --net=host --device /dev/gpiomem -v /home/jd/Weather/:/home -w /home raspbian-service:1.0 main/service.py
+docker run -d --net=host --device /dev/gpiomem -v /home/jd/Weather/:/home -w /home raspbian-service:1.0 main/web.py
 ```
