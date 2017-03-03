@@ -17,7 +17,7 @@ m = Mongo(log)
 
 def handler(signum, frame):
     run_service.clear()
-    log.info("Сигнал для остановки контейнера (%s)", signum)
+    log.info("Сигнал для остановки контейнера {}".format(signum))
 
 
 signal.signal(signal.SIGTERM, handler)
@@ -51,6 +51,6 @@ while run_service.is_set():
         while run_service.is_set() and time.time() - start < 3600:
             time.sleep(1)
     except Exception as e:
-        log.critical("Неизвестная ошибка (%s)", e)
+        log.critical("Неизвестная ошибка {}".format(e))
 
 log.info("Сервис остановлен\n")
