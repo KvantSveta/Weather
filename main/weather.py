@@ -20,10 +20,10 @@ class Weather():
             response = urlopen(page).read()
             self._flag = True
         except URLError as e:
-            self._log.error("Невозможно отправить запрос (%s)", e)
+            self._log.error("Невозможно отправить запрос {}".format(e))
             return
         except Exception as e:
-            self._log.error("Неизвестная ошибка (%s)", e)
+            self._log.error("Неизвестная ошибка {}".format(e))
             return
 
         soup = BeautifulSoup(response, "lxml")
@@ -149,6 +149,6 @@ if __name__ == "__main__":
     log = Logger(log_file)
     w = Weather(log)
     # print(w.get_weather)
-    print('Время работы:', round(time.time() - start, 3), 'с')
+    print("Время работы:", round(time.time() - start, 3), "с")
 
     subprocess.call(["rm", log_file])
