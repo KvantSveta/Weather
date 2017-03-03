@@ -21,9 +21,9 @@ class Mongo():
             try:
                 return function(self, *args, **kwargs)
             except errors.ServerSelectionTimeoutError as e:
-                self._log.error("Невозможно подключиться к БД (%s)", e)
+                self._log.error("Невозможно подключиться к БД {}".format(e))
             except Exception as e:
-                self._log.error("Неизвестная ошибка (%s)", e)
+                self._log.error("Неизвестная ошибка {}".format(e))
         return wrapper
 
     @property
