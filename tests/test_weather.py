@@ -10,8 +10,8 @@ __author__ = "Evgeny Goncharov"
 
 class TestWeather(unittest.TestCase):
     @classmethod
-    def setUpClass(self):
-        self.weather_log = "test_weather.log"
+    def setUpClass(cls):
+        cls.weather_log = "test_weather.log"
 
     def test_good_connect(self):
         w = Weather(Logger(file_name=self.weather_log))
@@ -28,8 +28,8 @@ class TestWeather(unittest.TestCase):
             w.get_weather
 
     @classmethod
-    def tearDownClass(self):
-        subprocess.call(["rm", self.weather_log])
+    def tearDownClass(cls):
+        subprocess.call(["rm", cls.weather_log])
 
 
 if __name__ == "__main__":
