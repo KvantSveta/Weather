@@ -62,6 +62,7 @@ class Weather():
         self._temperature = [int(i) for i in temperature]
 
         if not self._temperature:
+            self._flag = False
             raise ValueError("Empty temperature")
 
     def set_wind(self, s):
@@ -78,6 +79,7 @@ class Weather():
         self._wind = [(int(m.group(1)), m.group(2)) for m in wind]
 
         if not self._wind:
+            self._flag = False
             raise ValueError("Empty wind")
 
     def set_pressure(self, soup):
@@ -89,6 +91,7 @@ class Weather():
         ]
 
         if not self._pressure:
+            self._flag = False
             raise ValueError("Empty pressure")
 
     def set_humidity(self, soup):
@@ -96,6 +99,10 @@ class Weather():
         self._humidity = [
             int(h.text) for h in soup.find_all("div", "humidity_value")
         ]
+
+        if not self._humidity:
+            self._flag = False
+            raise ValueError("Empty humidity")
 
     def set_precipitation(self, s):
         # атмосферные осадки, мм
