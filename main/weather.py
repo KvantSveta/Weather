@@ -63,7 +63,6 @@ class Weather():
 
         if not self._temperature:
             self._flag = False
-            raise ValueError("Empty temperature")
 
     def set_wind(self, s):
         # скорость и направление ветра, м/с
@@ -80,7 +79,6 @@ class Weather():
 
         if not self._wind:
             self._flag = False
-            raise ValueError("Empty wind")
 
     def set_pressure(self, soup):
         # давление, мм рт. ст.
@@ -92,7 +90,6 @@ class Weather():
 
         if not self._pressure:
             self._flag = False
-            raise ValueError("Empty pressure")
 
     def set_humidity(self, soup):
         # влажность, %
@@ -102,7 +99,6 @@ class Weather():
 
         if not self._humidity:
             self._flag = False
-            raise ValueError("Empty humidity")
 
     def set_precipitation(self, s):
         # атмосферные осадки, мм
