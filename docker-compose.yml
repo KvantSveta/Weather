@@ -1,0 +1,21 @@
+version: "2"
+services:
+  service:
+    image: "service:1.0"
+    network_mode: "host"
+    stop_signal: SIGTERM
+    entrypoint:
+     - python3.6
+     - main/service.py
+    #devices:
+    # - "/dev/gpiomem:/dev/gpiomem"
+  web:
+    image: "service:1.0"
+    network_mode: "host"
+    ports:
+     - "5000:5000"
+    entrypoint:
+     - python3.6
+     - main/web.py
+    #devices:
+    # - "/dev/gpiomem:/dev/gpiomem"
