@@ -1,7 +1,6 @@
 .idea
 *.log
 .flake8
-docker-compose.yml
 .cache/
 __pycache__/
 .babelrc
