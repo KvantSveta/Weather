@@ -9,9 +9,21 @@ pip install -r requirements.txt
 ```
 
 on Desktop in ~/Weather
+
+build
 ```bash
-docker run -d --net=host -v /home/jd/Coding/Weather/:/home -w /home service:1.0 service.py
-docker run -d --net=host -v /home/jd/Coding/Weather/:/home -w /home service:1.0 web.py
+docker build -t service:1.0 -f dockerfiles/service/Dockerfile .
+```
+
+run
+```bash
+docker run -d --net=host service:1.0 main/service.py
+docker run -d --net=host service:1.0 main/web.py
+```
+
+run via docker-compose
+```bash
+docker-compose up -d
 ```
 
 Команда для остановки контейнера
@@ -20,7 +32,13 @@ docker kill -s 15 CONTAINER_ID
 ```
 
 on RPi in ~/Weather
+
+build
 ```bash
-docker run -d --net=host --device /dev/gpiomem -v /home/jd/Weather/:/home -w /home raspbian-service:1.0 main/service.py
-docker run -d --net=host --device /dev/gpiomem -v /home/jd/Weather/:/home -w /home raspbian-service:1.0 main/web.py
+docker build -t raspbian-service:1.0 -f dockerfiles/raspbian-service/Dockerfile .
+```
+run
+```bash
+docker run -d --net=host --device /dev/gpiomem raspbian-service:1.0 main/service.py
+docker run -d --net=host --device /dev/gpiomem raspbian-service:1.0 main/web.py
 ```
