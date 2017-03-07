@@ -3,21 +3,18 @@ FROM rpi-python35
 MAINTAINER Eugene Goncharov NikeLambert@gmail.com
 
 RUN apt-get update \
- && apt-get install python3-lxml \
-                    python3-pip \
-                    libxml2-dev \
-                    libxslt1-dev \
-                    zlib1g-dev
+ && apt-get install -y python3-lxml \
+                       python3-pip \
+                       libxml2-dev \
+                       libxslt1-dev \
+                       zlib1g-dev
 
-RUN pip3 install -U pip \
-                    bs4 \
-                    pymongo \
-                    flask \
-                    lxml \
-                    rpi.gpio \
-                    unittest2
+ADD . /home
 
-RUN apt-get clean
+WORKDIR /home
+
+RUN pip install -U -r requirements.txt \
+ && apt-get clean
 
 RUN echo "Europe/Moscow" > /etc/timezone \
  && dpkg-reconfigure -f noninteractive tzdata

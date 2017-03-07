@@ -1,20 +1,22 @@
-FROM python:3.5.2
-#FROM python:3.5.2-slim
-#FROM python:3.5.2-alpine
+FROM python:3.6
+#FROM python:3.6-slim
+#FROM python:3.6-alpine
 
 MAINTAINER Eugene Goncharov NikeLambert@gmail.com
 
-RUN apt-get update && apt-get install -y --no-install-recommends apt-utils \
-                   && pip3 install --upgrade pip \
-                                             bs4 \
-                                             pymongo \
-                                             flask \
-                                             lxml \
-                   && apt-get clean
+RUN apt-get update
 
-RUN echo "Europe/Moscow" > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
+ADD . /home
+
+WORKDIR /home
+
+RUN pip install -U -r requirements.txt \
+ && apt-get clean
+
+RUN echo "Europe/Moscow" > /etc/timezone \
+ && dpkg-reconfigure -f noninteractive tzdata
 
 # signal SIGTERM
 STOPSIGNAL 15
 
-ENTRYPOINT ["python3.5"]
+ENTRYPOINT ["python3.6"]
