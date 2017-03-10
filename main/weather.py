@@ -75,7 +75,7 @@ class Weather():
         r = re.compile("(\d*)(\w*)")
 
         wind = [r.match(m) for m in wind]
-        self._wind = [(int(m.group(1)), m.group(2)) for m in wind]
+        self._wind = [[int(m.group(1)), m.group(2)] for m in wind]
 
         if not self._wind:
             self._flag = False
