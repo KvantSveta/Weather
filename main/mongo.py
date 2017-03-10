@@ -42,3 +42,8 @@ class Mongo():
     @decorator
     def insert_one(self, document):
         self._collection_day.insert_one(document=document)
+
+    @decorator
+    def update_one(self, _filter, update):
+        self._collection_day.update_one(filter=_filter,
+                                        update={'$set': update})
