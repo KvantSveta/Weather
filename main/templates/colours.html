@@ -2,32 +2,33 @@
 <html lang="ru">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="colours.css">
         <script src="colours.js"></script>
         <title>RGB</title>
     </head>
     <body>
         <main>
-            <div class="c">
+            <form class="c">
                 <p>
                     Выберети цвет:
                 </p>
                 <p>
                     <label>Красный</label>
-                    <input id="red" class="c" type="text" value="0" />
+                    <input id="red" type="text" value="0">
                 </p>
                 <p>
                     <label>Зеленый</label>
-                    <input id="green" class="c" type="text" value="0" />
+                    <input id="green" type="text" value="0">
                 </p>
                 <p>
                     <label>Синий</label>
-                    <input id="blue" class="c" type="text" value="0" />
+                    <input id="blue" type="text" value="0">
                 </p>
                 <p>
-                    <input class="button" type="button" value="Применить" onclick="GetColours();" />
+                    <input class="button" type="button" value="Применить" onclick="GetColours();">
                 </p>
-            </div>
+            </form>
         </main>
     </body>
 </html>
