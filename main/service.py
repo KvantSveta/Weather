@@ -35,8 +35,9 @@ while run_service.is_set():
 
     # сервер БД доступен
     if m.ping_mongodb:
+        q = m.find_one(query)
         # записи нет в БД
-        if not m.find_one(query):
+        if not q:
             log.info("Записи нет в БД")
             w = Weather(log)
             # информация о погоде успешно получена
@@ -45,8 +46,20 @@ while run_service.is_set():
                 log.info("Документ успешно записан")
             else:
                 log.critical("Невозможно получить информацию о погоде")
+
+        # запись уже имеется в БД
         else:
-            log.info("Запись уже существует")
+            w = Weather(log)
+            # информация о погоде успешно получена
+            if w.ok_response:
+                q = m.find_one(query, {'_id': 0, 'temperature': 1})
+                if q['temperature'] != w.temperature:
+                    m.update_one(_filter=query,
+                                 update={'temperature': w.temperature})
+                    log.info("Документ успешно перезаписан")
+            else:
+                log.critical("Невозможно получить информацию о погоде")
+
     else:
         log.critical("Сервер с БД недоступен")
 
