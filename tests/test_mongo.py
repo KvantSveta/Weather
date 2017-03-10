@@ -100,6 +100,16 @@ class TestMongo(unittest.TestCase):
 
         self.assertFalse(self.mongo_host.ping_mongodb)
 
+    @unittest.skipUnless(mongo_available, "Mongo DB not available")
+    def test_update_one(self):
+        document = {"temp": 123456}
+        self.mongo_local.insert_one(document=document)
+        new_document = {"temp": 654321}
+        self.mongo_local.update_one(_filter=document, update=new_document)
+        document = self.mongo_local.find_one(query=new_document,
+                                             _filter={"_id": 0})
+        self.assertEqual(document, new_document)
+
     @classmethod
     def tearDownClass(cls):
         subprocess.call(["rm", cls.mongo_log])
