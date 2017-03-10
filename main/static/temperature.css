@@ -1,21 +1,17 @@
 body {
-    background-color: #64e674;
+    background-color: LightSeaGreen;
 }
 
 .t {
     font-family: sans-serif;
-    font-size: 1.2em;
-
+    font-size: 1.3em;
     /*отступ слева по краям*/
-    padding: 0.5em 15px;
-    line-height: 1.5;
+    padding: 0.1em 15px;
     background: #f9f9f9;
-    border-left: 2px solid #ccc;
-
-    display: block;
-    width: 315px;
-    /* отступ от края*/
+    /*ширина блока*/
+    width: 350px;
+    /* отступ от края: сверху 20 и auto по горизонтали*/
     margin: 20px auto;
+    /*скругление границ*/
     border-radius: 10px;
-    box-shadow: 0 0 5px #666;
 }
