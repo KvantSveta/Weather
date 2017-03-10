@@ -1,9 +1,17 @@
 body {
-    background-color: #ffd480;
+    background-color: LightSeaGreen;
 }
 
 .error {
     font-family: sans-serif;
-    font-size: 1.0em;
-    margin-bottom: 10px;
+    font-size: 1.3em;
+    background: #f9f9f9;
+    /*отступ слева по краям*/
+    padding: 0.1em 15px;
+    /*ширина блока*/
+    width: 80px;
+    /* отступ от края: сверху 20 и auto по горизонтали*/
+    margin: 20px auto;
+    /*скругление границ*/
+    border-radius: 10px;
 }
