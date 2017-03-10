@@ -4,13 +4,12 @@ FROM python:3.6
 
 MAINTAINER Eugene Goncharov NikeLambert@gmail.com
 
-RUN apt-get update
-
 ADD . /home
 
 WORKDIR /home
 
-RUN pip install -U -r requirements.txt \
+RUN apt-get update \
+ && pip install -U -r requirements.txt \
  && apt-get clean
 
 RUN echo "Europe/Moscow" > /etc/timezone \
