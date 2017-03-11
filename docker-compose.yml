@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - .:/home
+     - .:/home
     network_mode: host
     stop_signal: SIGTERM
     devices:
@@ -17,8 +17,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-   volumes:
-      - .:/home
+    volumes:
+     - .:/home
     network_mode: host
     devices:
      - "/dev/gpiomem:/dev/gpiomem"
