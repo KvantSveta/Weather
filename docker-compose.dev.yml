@@ -3,25 +3,21 @@ services:
   service:
     build: 
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     volumes:
       - .:/home
     network_mode: host
     stop_signal: SIGTERM
-    devices:
-     - "/dev/gpiomem:/dev/gpiomem"
     entrypoint:
-     - python3.5
+     - python3.6
      - main/service.py
   web:
     build: 
       context: .
       dockerfile: Dockerfile.dev
-   volumes:
+    volumes:
       - .:/home
     network_mode: host
-    devices:
-     - "/dev/gpiomem:/dev/gpiomem"
     entrypoint:
-     - python3.5
+     - python3.6
      - main/web.py
