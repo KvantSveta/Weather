@@ -12,7 +12,7 @@ body {
     /*отступ слева по краям*/
     padding: 10px 20px;
     /*ширина блока*/
-    width: 270px;
+    width: 260px;
     /* отступ от края: сверху 20 и auto по горизонтали*/
     margin: 20px auto;
 }
@@ -21,13 +21,16 @@ div {
     padding: 3px 1px;
 }
 
+.l {
+    margin: 1px 55px;
+}
+
 .i {
     background: #FFFFFF;
     float: right;
-    width: 150px;
+    width: 120px;
 }
 
-
 .button {
-    margin: 0px 90px 0px 90px;
+    margin: 1px 90px;
 }
