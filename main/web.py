@@ -42,7 +42,7 @@ def weather():
     log.info("Запрос на получение информации о погоде", 3)
 
     query = {"date": time.strftime("%d.%m.%y")}
-    current_time = str(time.strftime("%H:%M:%S - %d.%m.%y"))
+    current_time = str(time.strftime("%H:%M - %d.%m.%y"))
     weather = m.find_one(query)
 
     return render_template(
