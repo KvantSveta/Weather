@@ -45,25 +45,19 @@ def weather():
     current_time = str(time.strftime("%H:%M:%S - %d.%m.%y"))
     weather = m.find_one(query)
 
-    # температура, градус Цельсия
-    temperature = weather["temperature"]
-    # влажность, %
-    humidity = weather["humidity"]
-    # давление, мм рт. ст.
-    pressure = weather["pressure"]
-    # скорость и направление ветра, м/с
-    wind = weather["wind"]
-    # атмосферные осадки, мм
-    precipitation = weather["precipitation"]
-
     return render_template(
         "weather.html",
-        temperature=temperature,
-        humidity=humidity,
-        pressure=pressure,
-        wind=wind,
-        precipitation=precipitation,
-        current_time=current_time
+        current_time=current_time,
+        # температура, градус Цельсия
+        temperature=weather["temperature"],
+        # влажность, %
+        humidity=weather["humidity"],
+        # давление, мм рт. ст.
+        pressure=weather["pressure"],
+        # скорость и направление ветра, м/с
+        wind=weather["wind"],
+        # атмосферные осадки, мм
+        precipitation=weather["precipitation"]
     )
 
 
