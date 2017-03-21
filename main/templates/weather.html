@@ -6,30 +6,46 @@
         <title>Погода на сегодня</title>
     </head>
     <body>
-        <main>
-            <div class="w">
-                <p>
-                    Текущее время: {{current_time}}
-                </p>
-                <p>
-                    Погода на сегодня
-                </p>
-                <p>
-                    Температура воздуха (градус Цельсия): {{temperature}}
-                </p>
-                <p>
-                    Влажность (%): {{humidity}}
-                </p>
-                <p>
-                    Давление (мм рт. ст.): {{pressure}}
-                </p>
-                <p>
-                    Скорость и направление ветра (м/с): {{wind}}
-                </p>
-                <p>
-                    Атмосферные осадки (мм): {{precipitation}}
-                </p>
-            </div>
+        <main class="w">
+            <table>
+                <caption>Погода на {{current_time}}</caption>
+                <tr>
+                    <td class="r">Время дня:</td>
+                    {% for t in ["0:00", "3:00", "6:00", "9:00", "12:00", "15:00", "18:00", "21:00", "24:00"] %}
+                        <td>{{ t }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td class="r">Температура воздуха (&#8451;):</td>
+                    {% for t in temperature %}
+                        <td>{{ t }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td class="r">Влажность (%):</td>
+                    {% for h in humidity %}
+                        <td>{{ h }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td class="r">Давление (мм рт. ст.):</td>
+                    {% for p in pressure %}
+                        <td>{{ p }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td class="r">Скорость и направление ветра (м/с):</td>
+                    {% for s, d in wind %}
+                        <td>{{ s }} {{ d }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td class="r">Атмосферные осадки (мм):</td>
+                    {% for p in pressure %}
+                        <td>{{ p }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
         </main>
     </body>
 </html>

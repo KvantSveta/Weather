@@ -1,9 +1,35 @@
 body {
-    background-color: #64e674;
+    background-color: LightSeaGreen;
 }
 
 .w {
     font-family: sans-serif;
-    font-size: 1.0em;
-    margin-bottom: 10px;
+    font-size: 1.1em;
+    /*отступ слева по краям*/
+    padding: 10px 20px;
+    /*фон блока*/
+    background: #f8f8f8;
+    /*ширина блока*/
+    width: 750px;
+    /* отступ от края: сверху 20 и auto по горизонтали*/
+    margin: 20px auto;
+    /*скругление границ*/
+    border-radius: 15px;
+}
+/*четный*/
+tr:nth-child(even) {
+    background-color: #eee;
+}
+/*нечетный*/
+tr:nth-child(odd) {
+   background-color:#fff;
+}
+
+td {
+    padding: 5px;
+    text-align: center;
+}
+
+.r {
+    text-align: left;
 }
