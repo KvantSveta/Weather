@@ -53,10 +53,10 @@ while run_service.is_set():
             w = Weather(log)
             # информация о погоде успешно получена
             if w.ok_response:
-                q = m.find_one(query, {'_id': 0, 'temperature': 1})
-                if q['temperature'] != w.temperature:
-                    m.update_one(_filter=query,
-                                 update={'temperature': w.temperature})
+                q = m.find_one(query, {'_id': 0})
+                if q != w.get_weather:
+                    m.find_one_and_replace(_filter=query,
+                                           replacement=w.get_weather)
                     log.info("Документ успешно перезаписан")
             else:
                 log.critical("Невозможно получить информацию о погоде")
