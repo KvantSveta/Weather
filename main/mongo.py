@@ -40,6 +40,11 @@ class Mongo():
         return self._collection_day.find_one(query, _filter)
 
     @decorator
+    def find_one_and_replace(self, _filter, replacement):
+        self._collection_day.find_one_and_replace(filter=_filter,
+                                                  replacement=replacement)
+
+    @decorator
     def insert_one(self, document):
         self._collection_day.insert_one(document=document)
 
