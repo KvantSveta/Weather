@@ -86,7 +86,7 @@ class TestMongo(unittest.TestCase):
         new_count = self.mongo_local._collection_day.count()
         self.assertEqual(new_count, count + 1)
 
-        self.mongo_local._collection_day.remove(document)
+        self.mongo_local.remove(spec_or_id=document)
         new_count = self.mongo_local._collection_day.count()
         self.assertEqual(new_count, count)
 
@@ -121,7 +121,16 @@ class TestMongo(unittest.TestCase):
                                               replacement=new_document)
         self.assertTrue(self.mongo_local.find_one(query=new_document))
         self.assertFalse(self.mongo_local.find_one(query=document))
-        self.mongo_local._collection_day.remove(new_document)
+        self.mongo_local.remove(spec_or_id=new_document)
+        self.assertFalse(self.mongo_local.find_one(query=document))
+
+    @unittest.skipUnless(mongo_available, "Mongo DB not available")
+    def test_remove(self):
+        document = {"temp": 123456}
+        self.assertFalse(self.mongo_local.find_one(query=document))
+        self.mongo_local.insert_one(document=document)
+        self.assertTrue(self.mongo_local.find_one(query=document))
+        self.mongo_local.remove(spec_or_id=document)
         self.assertFalse(self.mongo_local.find_one(query=document))
 
     @classmethod
