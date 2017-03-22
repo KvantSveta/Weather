@@ -110,6 +110,20 @@ class TestMongo(unittest.TestCase):
                                              _filter={"_id": 0})
         self.assertEqual(document, new_document)
 
+    @unittest.skipUnless(mongo_available, "Mongo DB not available")
+    def test_find_one_and_replace(self):
+        document = {"temp": 123456}
+        self.assertFalse(self.mongo_local.find_one(query=document))
+        self.mongo_local.insert_one(document=document)
+        self.assertTrue(self.mongo_local.find_one(query=document))
+        new_document = {"temp": 654321}
+        self.mongo_local.find_one_and_replace(_filter=document,
+                                              replacement=new_document)
+        self.assertTrue(self.mongo_local.find_one(query=new_document))
+        self.assertFalse(self.mongo_local.find_one(query=document))
+        self.mongo_local._collection_day.remove(new_document)
+        self.assertFalse(self.mongo_local.find_one(query=document))
+
     @classmethod
     def tearDownClass(cls):
         subprocess.call(["rm", cls.mongo_log])
