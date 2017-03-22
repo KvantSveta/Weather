@@ -52,3 +52,7 @@ class Mongo():
     def update_one(self, _filter, update):
         self._collection_day.update_one(filter=_filter,
                                         update={'$set': update})
+
+    @decorator
+    def remove(self, spec_or_id):
+        self._collection_day.remove(spec_or_id=spec_or_id)
