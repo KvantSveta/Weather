@@ -1,5 +1,6 @@
 import signal
 import time
+from datetime import datetime
 from threading import Event
 
 try:
@@ -63,10 +64,9 @@ while run_service.is_set():
     else:
         log.critical("Сервер с БД недоступен")
 
-    start = time.time()
     # делать запрос каждый час
     try:
-        while run_service.is_set() and time.time() - start < 3600:
+        while run_service.is_set() and datetime.now().minute:
             time.sleep(1)
     except Exception as e:
         log.critical("Неизвестная ошибка {}".format(e))
