@@ -5,7 +5,7 @@ __author__ = "Evgeny Goncharov"
 
 
 class Mongo():
-    def __init__(self, log, db_name="Weather", collection_name="day",
+    def __init__(self, log, db_name="weather", collection_name="day",
                  ip_address="localhost", port=27017, server_timeout_ms=1000):
         self._log = log
 
