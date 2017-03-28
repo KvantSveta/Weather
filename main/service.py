@@ -45,6 +45,7 @@ while run_service.is_set():
             if w.ok_response:
                 m.insert_one(document=w.get_weather)
                 log.info("Документ успешно записан")
+                time.sleep(60)
             else:
                 log.critical("Невозможно получить информацию о погоде")
 
@@ -58,6 +59,7 @@ while run_service.is_set():
                     m.find_one_and_replace(_filter=query,
                                            replacement=w.get_weather)
                     log.info("Документ успешно перезаписан")
+                    time.sleep(60)
             else:
                 log.critical("Невозможно получить информацию о погоде")
 
