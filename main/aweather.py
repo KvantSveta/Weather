@@ -55,13 +55,16 @@ class Weather():
     async def set_temperature(self, soup):
         # температура, градус Цельсия
         s = soup.find("div", "templine_inner")
+
+        args = "div", "weather_item js_temp_graph"
         temperature = [
-            t.text for t in s.find_all("span", "js_value val_to_convert")
+            t["data-value"] for t in s.find_all(*args)
         ]
 
-        temperature = [c.replace(chr(8722), '-') for c in temperature]
+        self._temperature = [int(i) for i in temperature]
 
-        self._temperature = list(map(int, temperature))
+        if not self._temperature:
+            self._flag = False
 
     async def set_wind(self, s):
         # скорость и направление ветра, м/с
@@ -76,18 +79,28 @@ class Weather():
         wind = [r.match(m) for m in wind]
         self._wind = [(int(m.group(1)), m.group(2)) for m in wind]
 
+        if not self._wind:
+            self._flag = False
+
     async def set_pressure(self, soup):
         # давление, мм рт. ст.
         s = soup.find("div", "pressureline")
+        args = "div", "weather_item js_pressure_graph"
         self._pressure = [
-            int(p.text) for p in s.find_all("span", "js_value val_to_convert")
+            int(p["data-value"]) for p in s.find_all(*args)
         ]
+
+        if not self._pressure:
+            self._flag = False
 
     async def set_humidity(self, soup):
         # влажность, %
         self._humidity = [
             int(h.text) for h in soup.find_all("div", "humidity_value")
         ]
+
+        if not self._humidity:
+            self._flag = False
 
     async def set_precipitation(self, s):
         # атмосферные осадки, мм
