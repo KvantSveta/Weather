@@ -80,18 +80,18 @@ class TestMongo(unittest.TestCase):
 
     @unittest.skipUnless(mongo_available, "Mongo DB not available")
     def test_insert(self):
-        count = self.mongo_local._collection_day.count()
+        count = self.mongo_local._collection.count()
         document = {"temp": 123456}
         self.mongo_local.insert_one(document=document)
-        new_count = self.mongo_local._collection_day.count()
+        new_count = self.mongo_local._collection.count()
         self.assertEqual(new_count, count + 1)
 
         self.mongo_local.remove(spec_or_id=document)
-        new_count = self.mongo_local._collection_day.count()
+        new_count = self.mongo_local._collection.count()
         self.assertEqual(new_count, count)
 
         self.mongo_host.insert_one(document=document)
-        new_count = self.mongo_local._collection_day.count()
+        new_count = self.mongo_local._collection.count()
         self.assertEqual(new_count, count)
 
     @unittest.skipUnless(mongo_available, "Mongo DB not available")
