@@ -2,7 +2,6 @@ import signal
 import time
 from datetime import datetime
 from threading import Event
-from subprocess import call
 
 try:
     from logger import Logger
@@ -66,16 +65,6 @@ while run_service.is_set():
 
     else:
         log.critical("Сервер с БД недоступен")
-
-    # делать бэкап каждый день в 23:00
-    if datetime.now().hour == 23:
-        try:
-            call(["mongodump", "--db", m._db.name, "--collection",
-                  m._collection.name,  "--out", "/media/weather_backup/"])
-            log.info("Бэкап успешно создан")
-        except Exception as e:
-            log.error("Невозможно сделать бэкап {}".format(e))
-            del e
 
     # делать запрос каждый час
     try:
