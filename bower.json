@@ -1,0 +1,14 @@
+{
+  "name": "Weather",
+  "homepage": "https://github.com/KvantSveta/Weather",
+  "authors": [
+    "jd <NikeLambert@gmail.com>"
+  ],
+  "description": "",
+  "main": "web.py",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "bootstrap-sass": "^3.3.7"
+  }
+}
