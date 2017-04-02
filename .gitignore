@@ -5,3 +5,8 @@
 __pycache__/
 .babelrc
 node_modules
+.sass-cache/
+bower_components/
+gpio man.txt
+main/static/*.css.map
+main/static/*.css
