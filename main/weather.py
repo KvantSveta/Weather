@@ -108,7 +108,7 @@ class Weather():
         ]
 
         if precipitation == []:
-            self._precipitation = [0.0] * 9
+            self._precipitation = [0.0] * 8
         else:
             precipitation = [c.replace("н/д", "0") for c in precipitation]
 
