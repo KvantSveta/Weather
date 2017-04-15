@@ -698,14 +698,12 @@ body {
   position: relative;
   min-height: 1px;
   padding-left: 15px;
-  padding-right: 15px; }
+  padding-right: 15px;
+  /*@include make-md-column-offset(3) */ }
   @media (min-width: 992px) {
     .table-wrapper {
       float: left;
-      width: 50%; } }
-  @media (min-width: 992px) {
-    .table-wrapper {
-      margin-left: 25%; } }
+      width: 100%; } }
 
 .table {
   /*фон блока */
