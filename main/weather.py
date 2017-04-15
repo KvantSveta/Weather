@@ -30,6 +30,15 @@ class Weather():
 
         self.set_weather(soup)
 
+    def decorator(function):
+        def wrapper(self, *args, **kwargs):
+            try:
+                function(self, *args, **kwargs)
+            except Exception as e:
+                self._log.error("Ошибка при прассинге html-файла {}".format(e))
+                self._flag = False
+        return wrapper
+
     @property
     def ok_response(self):
         return self._flag
@@ -50,6 +59,7 @@ class Weather():
     def set_date(self):
         self._date = time.strftime("%d.%m.%y")
 
+    @decorator
     def set_temperature(self, soup):
         # температура, градус Цельсия
         s = soup.find("div", "templine_inner")
@@ -64,6 +74,7 @@ class Weather():
         if not self._temperature:
             self._flag = False
 
+    @decorator
     def set_wind(self, s):
         # скорость и направление ветра, м/с
         wind = [
@@ -80,6 +91,7 @@ class Weather():
         if not self._wind:
             self._flag = False
 
+    @decorator
     def set_pressure(self, soup):
         # давление, мм рт. ст.
         s = soup.find("div", "pressureline")
@@ -91,6 +103,7 @@ class Weather():
         if not self._pressure:
             self._flag = False
 
+    @decorator
     def set_humidity(self, soup):
         # влажность, %
         self._humidity = [
@@ -100,6 +113,7 @@ class Weather():
         if not self._humidity:
             self._flag = False
 
+    @decorator
     def set_precipitation(self, s):
         # атмосферные осадки, мм
         _s = s.find("div", "_line precipitationline js_precipitation clearfix")
@@ -161,7 +175,10 @@ if __name__ == "__main__":
     log_file = "main.log"
     log = Logger(log_file)
     w = Weather(log)
-    print(w.get_weather)
-    print("Время работы:", round(time.time() - start, 3), "с")
+    if w.ok_response:
+        print(w.get_weather)
+        print("Время работы:", round(time.time() - start, 3), "с")
+    else:
+        print('Error')
 
     subprocess.call(["rm", log_file])
