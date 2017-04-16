@@ -9,4 +9,3 @@ node_modules
 bower_components/
 gpio man.txt
 main/static/*.css.map
-main/static/*.css
