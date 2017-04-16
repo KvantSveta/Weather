@@ -42,23 +42,31 @@ def weather():
     log.info("Запрос на получение информации о погоде", 3)
 
     query = {"date": time.strftime("%d.%m.%y")}
-    current_time = str(time.strftime("%H:%M - %d.%m.%y"))
     weather = m.find_one(query)
 
-    return render_template(
-        "weather.html",
-        current_time=current_time,
-        # температура, градус Цельсия
-        temperature=weather["temperature"],
-        # влажность, %
-        humidity=weather["humidity"],
-        # давление, мм рт. ст.
-        pressure=weather["pressure"],
-        # скорость и направление ветра, м/с
-        wind=weather["wind"],
-        # атмосферные осадки, мм
-        precipitation=weather["precipitation"]
-    )
+    if weather:
+        # отрисуется, если есть запись в БД
+        return render_template(
+            "weather.html",
+            current_time=str(time.strftime("%H:%M - %d.%m.%y")),
+            # температура, градус Цельсия
+            temperature=weather["temperature"],
+            # влажность, %
+            humidity=weather["humidity"],
+            # давление, мм рт. ст.
+            pressure=weather["pressure"],
+            # скорость и направление ветра, м/с
+            wind=weather["wind"],
+            # атмосферные осадки, мм
+            precipitation=weather["precipitation"]
+        )
+
+    else:
+        return render_template(
+            "error.html",
+            error=503,
+            message="Сервис недоступен, попробуйте позднее"
+        ), 503
 
 
 @app.route("/colours", methods=["GET", "POST"])
@@ -79,7 +87,7 @@ def colours():
 
 @app.errorhandler(404)
 def not_found_error(error):
-    return render_template('404.html'), 404
+    return render_template('error.html'), 404
 
 
 app.config.from_json("config.json")
