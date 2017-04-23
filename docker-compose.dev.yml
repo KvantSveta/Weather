@@ -1,22 +1,13 @@
 version: "2"
 services:
   service:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    volumes:
-      - .:/home
+    image: weather-service:1.0
     network_mode: host
-    stop_signal: SIGTERM
     entrypoint:
      - python3.6
      - main/service.py
   web:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    volumes:
-      - .:/home
+    image: weather-service:1.0
     network_mode: host
     entrypoint:
      - python3.6
