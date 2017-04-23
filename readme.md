@@ -12,13 +12,13 @@ pip install -r requirements.txt
 
 build image
 ```bash
-docker build -t service:1.0 -f Dockerfile.dev .
+docker build -t weather-service:1.0 -f Dockerfile.dev .
 ```
 
 run image
 ```bash
-docker run -d --net=host service:1.0 main/service.py
-docker run -d --net=host service:1.0 main/web.py
+docker run -d --net=host weather-service:1.0 main/service.py
+docker run -d --net=host weather-service:1.0 main/web.py
 ```
 
 build via docker-compose
@@ -36,16 +36,16 @@ docker-compose -f docker-compose.dev.yml up -d
 docker kill -s 15 CONTAINER_ID
 ```
 
-**on RPi in ~/Weather**
+**on Raspberry Pi in ~/Weather**
 
 build image
 ```bash
-docker build -t raspbian-service:1.0 -f Dockerfile .
+docker build -t weather-service:1.0 -f Dockerfile .
 ```
 run image
 ```bash
-docker run -d --net=host --device /dev/gpiomem raspbian-service:1.0 main/service.py
-docker run -d --net=host --device /dev/gpiomem raspbian-service:1.0 main/web.py
+docker run -d --net=host --device /dev/gpiomem weather-service:1.0 main/service.py
+docker run -d --net=host --device /dev/gpiomem weather-service:1.0 main/web.py
 ```
 
 build via docker-compose
