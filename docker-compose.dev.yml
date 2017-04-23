@@ -1,14 +1,35 @@
 version: "2"
+
 services:
   service:
     image: weather-service:1.0
-    network_mode: host
+    depends_on:
+      - mongo
+    links:
+      - mongo
+    environment:
+      - DB=mongo
     entrypoint:
      - python3.6
      - main/service.py
+
   web:
     image: weather-service:1.0
-    network_mode: host
+    depends_on:
+      - mongo
+    links:
+      - mongo
+    environment:
+      - DB=mongo
+    ports:
+      - "5000:5000"
     entrypoint:
      - python3.6
      - main/web.py
+
+  mongo:
+    image: mongo:3.4
+    environment:
+      - MONGO_DATA_DIR=/data/db
+    volumes:
+      - /home/jd/data/db:/data/db
