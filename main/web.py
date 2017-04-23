@@ -1,3 +1,4 @@
+import os
 import time
 from subprocess import check_output
 
@@ -17,7 +18,10 @@ __author__ = "Evgeny Goncharov"
 app = Flask(__name__, static_url_path="")
 
 log = Logger("web.log")
-m = Mongo(log)
+
+m = Mongo(
+    log, ip_address=os.environ['DB'] if os.environ.get('DB') else "localhost"
+)
 
 if import_pwm:
     pwm_led = Pwm_led()
