@@ -1,3 +1,4 @@
+import os
 import signal
 import time
 from datetime import datetime
@@ -18,7 +19,10 @@ run_service = Event()
 run_service.set()
 
 log = Logger("weather.log")
-m = Mongo(log)
+
+m = Mongo(
+    log, ip_address=os.environ['DB'] if os.environ.get('DB') else "localhost"
+)
 
 
 def handler(signum, frame):
