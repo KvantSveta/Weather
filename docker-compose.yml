@@ -1,24 +1,15 @@
 version: "2"
 services:
   service:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-     - .:/home
+    image: weather-service:1.0
     network_mode: host
-    stop_signal: SIGTERM
     devices:
      - "/dev/gpiomem:/dev/gpiomem"
     entrypoint:
      - python3.5
      - main/service.py
   web:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-     - .:/home
+    image: weather-service:1.0
     network_mode: host
     devices:
      - "/dev/gpiomem:/dev/gpiomem"
