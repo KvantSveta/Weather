@@ -73,7 +73,7 @@ def weather():
         ), 503
 
 
-@app.route("/colours", methods=["GET", "POST"])
+@app.route("/colors", methods=["GET", "POST"])
 def colours():
     log.info("Запрос на изменения цвета led с использование pwm на RPi", 3)
 
@@ -86,7 +86,7 @@ def colours():
             int(data["blue"] / 255 * 100)
         )
 
-    return render_template("colours.html")
+    return render_template("colors.html")
 
 
 @app.errorhandler(404)
