@@ -91,7 +91,11 @@ def colours():
 
 @app.errorhandler(404)
 def not_found_error(error):
-    return render_template('error.html'), 404
+    return render_template(
+        "error.html",
+        error=404,
+        message="Неправильный адрес страницы"
+    ), 404
 
 
 app.config.from_json("config.json")
