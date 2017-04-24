@@ -7,6 +7,8 @@ services:
       - mongo
     links:
       - mongo
+    volumes:
+      - .:/home
     environment:
       - DB=mongo
     entrypoint:
@@ -19,10 +21,12 @@ services:
       - mongo
     links:
       - mongo
+    volumes:
+      - .:/home
     environment:
       - DB=mongo
     ports:
-      - "5000:5000"
+      - 5000:5000
     entrypoint:
      - python3.6
      - main/web.py
