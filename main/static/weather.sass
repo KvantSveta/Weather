@@ -1,34 +1,3 @@
-@import '../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/grid-framework'
-@import '../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/grid'
-@import '../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/variables'
-@import '../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins'
-@import '../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/grid'
-
-body
-    background-color: LightSeaGreen
-    font-family: sans-serif
-    font-size: 1.1em
-
-.container
-    @include container-fixed
-
-.row
-    @include make-row
-
-.table-wrapper
-    @include make-md-column(12)
-    /*@include make-md-column-offset(3)*/
-
-.table
-    /*фон блока*/
-    background: #f8f8f8
-    /* отступ от края: сверху 20 и auto по горизонтали*/
-    margin: 20px auto
-    /*отступ слева по краям*/
-    padding: 10px 20px
-    /*скругление границ*/
-    border-radius: 15px
-
 /*четный*/
 tr:nth-child(even)
     background-color: #eee
@@ -38,8 +7,7 @@ tr:nth-child(odd)
     background-color: #fff
 
 td
-    padding: 5px
     text-align: center
 
-.r
+.first-column
     text-align: left
