@@ -1,6 +1,6 @@
 "use strict";
 
-function GetColours() {
+function GetColors() {
     var array = [document.getElementById("red").value, document.getElementById("green").value, document.getElementById("blue").value];
 
     array = array.map(function (i) {
@@ -14,7 +14,7 @@ function GetColours() {
     }
 
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/colours", true);
+    xhr.open("POST", "/colors", true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(JSON.stringify({
         "red": array[0],
