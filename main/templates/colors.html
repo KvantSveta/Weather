@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="bundle.css">
+    <script src="colors.js"></script>
+    <title>RGB</title>
+</head>
+<body>
+<main>
+    {% include "menu.html" %}
+    {% block menu %}
+    {% endblock %}
+    <div class="container">
+        <h4>Выберите цвет:</h4>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="control-label col-sm-1" for="red">Красный:</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" id="red">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-1" for="green">Зеленый:</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" id="green">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-1" for="blue">Синий:</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" id="blue">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-1 col-sm-2">
+                    <button type="submit" class="btn btn-primary" onclick="GetColors();">Применить</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+</html>
