@@ -2,16 +2,17 @@
 <html lang="ru">
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="error.css">
+    <link rel="stylesheet" type="text/css" href="bundle.css">
     <title>Title</title>
 </head>
 <body>
-<main class="container">
-    <div class="row">
-        <div class="error">
-            <p>
-                ERROR {{ error }} {{ message }}
-            </p>
+<main>
+    {% include "menu.html" %}
+    {% block menu %}
+    {% endblock %}
+    <div class="container">
+        <div class="alert alert-danger">
+            <strong>ERROR</strong> {{ error }} {{ message }}
         </div>
     </div>
 </main>
