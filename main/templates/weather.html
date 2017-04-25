@@ -2,53 +2,57 @@
 <html lang="ru">
 <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="bundle.css">
     <link rel="stylesheet" type="text/css" href="weather.css">
     <title>Погода на сегодня</title>
 </head>
 <body>
-<main class="container">
-    <div class="row">
-        <div class="table-wrapper">
-            <table class="table">
-                <caption>Погода на {{current_time}}</caption>
-                <tr>
-                    <td class="r">Время дня:</td>
-                    {% for t in ["0:00", "3:00", "6:00", "9:00", "12:00", "15:00", "18:00", "21:00"] %}
+<main>
+    {% include "menu.html" %}
+    {% block menu %}
+    {% endblock %}
+    <div class="container">
+        <h4>Погода на {{ current_time }}</h4>
+        <table class="table table-striped">
+            <tbody>
+            <tr>
+                <td class="first-column">Время дня:</td>
+                {% for t in ["0:00", "3:00", "6:00", "9:00", "12:00", "15:00", "18:00", "21:00"] %}
                     <td>{{ t }}</td>
-                    {% endfor %}
-                </tr>
-                <tr>
-                    <td class="r">Температура воздуха (&#8451;):</td>
-                    {% for t in temperature %}
+                {% endfor %}
+            </tr>
+            <tr>
+                <td class="first-column">Температура воздуха (&#8451;):</td>
+                {% for t in temperature %}
                     <td>{{ t }}</td>
-                    {% endfor %}
-                </tr>
-                <tr>
-                    <td class="r">Влажность (%):</td>
-                    {% for h in humidity %}
+                {% endfor %}
+            </tr>
+            <tr>
+                <td class="first-column">Влажность (%):</td>
+                {% for h in humidity %}
                     <td>{{ h }}</td>
-                    {% endfor %}
-                </tr>
-                <tr>
-                    <td class="r">Давление (мм рт. ст.):</td>
-                    {% for p in pressure %}
+                {% endfor %}
+            </tr>
+            <tr>
+                <td class="first-column">Давление (мм рт. ст.):</td>
+                {% for p in pressure %}
                     <td>{{ p }}</td>
-                    {% endfor %}
-                </tr>
-                <tr>
-                    <td class="r">Скорость и направление ветра (м/с):</td>
-                    {% for s, d in wind %}
+                {% endfor %}
+            </tr>
+            <tr>
+                <td class="first-column">Скорость и направление ветра (м/с):</td>
+                {% for s, d in wind %}
                     <td>{{ s }} {{ d }}</td>
-                    {% endfor %}
-                </tr>
-                <tr>
-                    <td class="r">Атмосферные осадки (мм):</td>
-                    {% for p in precipitation %}
+                {% endfor %}
+            </tr>
+            <tr>
+                <td class="first-column">Атмосферные осадки (мм):</td>
+                {% for p in precipitation %}
                     <td>{{ p }}</td>
-                    {% endfor %}
-                </tr>
-            </table>
-        </div>
+                {% endfor %}
+            </tr>
+            </tbody>
+        </table>
     </div>
 </main>
 </body>
