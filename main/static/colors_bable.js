@@ -1,5 +1,5 @@
 
-function GetColours() {
+function GetColors() {
     let array = [
         document.getElementById("red").value,
         document.getElementById("green").value,
@@ -15,7 +15,7 @@ function GetColours() {
     }
 
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", "/colours", true);
+    xhr.open("POST", "/colors", true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(
         JSON.stringify(
