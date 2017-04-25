@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html lang="ru">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="temperature.css">
-        <title>Температура</title>
-    </head>
-    <body>
-        <main>
-            <div class="t">
-                <p>
-                    Текущее время: {{current_time}}
-                </p>
-                <p>
-                    Температура Raspberry Pi: {{temperature}}
-                </p>
-            </div>
-        </main>
-    </body>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="bundle.css">
+    <title>Температура</title>
+</head>
+<body>
+<main>
+    {% include "menu.html" %}
+    {% block menu %}
+    {% endblock %}
+    <div class="container">
+        <div>
+            <p>
+                Текущее время: {{current_time}}
+            </p>
+            <p>
+                Температура Raspberry Pi: {{temperature}}
+            </p>
+        </div>
+    </div>
+</main>
+</body>
 </html>
