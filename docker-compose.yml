@@ -1,16 +1,22 @@
 version: "2"
+
 services:
   service:
     image: weather-service:1.0
     network_mode: host
+    volumes:
+      - .:/home
     devices:
      - "/dev/gpiomem:/dev/gpiomem"
     entrypoint:
      - python3.5
      - main/service.py
+
   web:
     image: weather-service:1.0
     network_mode: host
+    volumes:
+      - .:/home
     devices:
      - "/dev/gpiomem:/dev/gpiomem"
     entrypoint:
