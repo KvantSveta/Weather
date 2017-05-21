@@ -41,9 +41,6 @@ class TestWeather(unittest.TestCase):
         self.assertFalse(w.ok_response)
 
         with self.assertRaises(AttributeError):
-            w.date
-
-        with self.assertRaises(AttributeError):
             w.temperature
 
         with self.assertRaises(AttributeError):
