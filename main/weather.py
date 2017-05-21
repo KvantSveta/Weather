@@ -16,6 +16,8 @@ class Weather():
 
         self._flag = False
 
+        self._date = time.strftime("%d.%m.%y")
+
         try:
             response = urlopen(page).read()
             self._flag = True
@@ -44,8 +46,6 @@ class Weather():
         return self._flag
 
     def set_weather(self, soup):
-        self.set_date()
-
         self.set_temperature(soup)
 
         self.set_wind(soup)
@@ -55,9 +55,6 @@ class Weather():
         self.set_humidity(soup)
 
         self.set_precipitation(soup)
-
-    def set_date(self):
-        self._date = time.strftime("%d.%m.%y")
 
     @decorator
     def set_temperature(self, soup):
@@ -121,7 +118,8 @@ class Weather():
             r.text.strip() for r in _s.find_all("div", "weather_item")
         ]
 
-        if precipitation == []:
+        # if precipitation == []
+        if not precipitation:
             self._precipitation = [0.0] * 8
         else:
             precipitation = [c.replace("н/д", "0") for c in precipitation]
@@ -169,7 +167,10 @@ class Weather():
 if __name__ == "__main__":
     import subprocess
 
-    from main.logger import Logger
+    try:
+        from logger import Logger
+    except ImportError:
+        from main.logger import Logger
 
     start = time.time()
     log_file = "main.log"
