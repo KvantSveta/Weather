@@ -61,8 +61,6 @@ def weather():
             pressure=weather["pressure"],
             # скорость и направление ветра, м/с
             wind=weather["wind"],
-            # атмосферные осадки, мм
-            precipitation=weather["precipitation"]
         )
 
     else:

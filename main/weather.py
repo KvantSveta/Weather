@@ -1,4 +1,3 @@
-import re
 import time
 from urllib.error import URLError
 from urllib.request import urlopen
@@ -54,7 +53,7 @@ class Weather():
 
         self.set_humidity(soup)
 
-        self.set_precipitation(soup)
+        # self.set_precipitation(soup)
 
     @decorator
     def set_temperature(self, soup):
@@ -75,15 +74,14 @@ class Weather():
     def set_wind(self, s):
         # скорость и направление ветра, м/с
         wind = [
-            w.text for w in s.find_all("div", "wind_value js_meas_container")
+            w.text for w in s.find_all("div", "widget__row widget__row_table")
         ]
 
+        wind = wind[0]
+        wind = wind.split()
         wind = [c.replace('штиль', '0') for c in wind]
 
-        r = re.compile("(\d*)(\w*)")
-
-        wind = [r.match(m) for m in wind]
-        self._wind = [[int(m.group(1)), m.group(2)] for m in wind]
+        self._wind = [(wind[i], wind[i+1]) for i in range(0, 16, 2)]
 
         if not self._wind:
             self._flag = False
@@ -103,8 +101,14 @@ class Weather():
     @decorator
     def set_humidity(self, soup):
         # влажность, %
+        humidity = [
+            h for h in soup.find_all("div", "widget__row widget__row_table")
+        ]
+
+        soup = humidity[2]
+
         self._humidity = [
-            int(h.text) for h in soup.find_all("div", "humidity_value")
+            h.text for h in soup.find_all("div", "widget__item")
         ]
 
         if not self._humidity:
@@ -160,7 +164,7 @@ class Weather():
             "wind": self.wind,
             "pressure": self.pressure,
             "humidity": self.humidity,
-            "precipitation": self.precipitation
+            # "precipitation": self.precipitation
         }
 
 
