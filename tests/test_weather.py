@@ -28,7 +28,7 @@ class TestWeather(unittest.TestCase):
 
         self.assertTrue(w.humidity)
 
-        self.assertTrue(w.precipitation)
+        # self.assertTrue(w.precipitation)
 
         self.assertTrue(w.get_weather)
 
@@ -52,8 +52,8 @@ class TestWeather(unittest.TestCase):
         with self.assertRaises(AttributeError):
             w.humidity
 
-        with self.assertRaises(AttributeError):
-            w.precipitation
+        # with self.assertRaises(AttributeError):
+        #     w.precipitation
 
         with self.assertRaises(AttributeError):
             w.get_weather
